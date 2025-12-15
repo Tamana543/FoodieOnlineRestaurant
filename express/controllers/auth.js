@@ -353,7 +353,7 @@ return resetUser.save()
   // apiKey.apiKey = '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';
   // const transport = nodemailer.createTransport(nodemailerTransp({
   //   auth:{
-  //     api_key : '90c487b367fd75893b92a826cf4d55dd-3c134029-4f83497b',
+  //     api_key : '',
   //   }
   // }))0
  */
