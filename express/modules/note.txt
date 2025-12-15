@@ -1,0 +1,767 @@
+this is when you are using only node js no express : 
+form admin getAddProduct 
+    // res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title" placeholder="Enter product title" /><button type="submit">Add Product</button></form>')
+     // res.sendFile(path.join(__dirname,'../','Views','add-product.html'))// there is a probem with it, it do not work for Linux or ther Os , as they start with \ not / so
+     // res.sendFile(path.join(rootDir,'Views','add-product.html')) // Use the rootDir utility to get the correct path to the Views directory
+     // next()
+
+
+
+Use this folder if you want to work with sequalizer, put the codes in place, delete this note and take the files out of the folder. 
+ExpressApp.js : 
+//Sequalizer
+/** 
+ const sequalizer = require('./util/database')
+     const Product = require('./modules/product')
+     const User = require('./modules/user')
+     const Cart = require('./modules/cart')
+     const cartItems = require('./modules/cartItem')
+     const Order = require('./modules/order') ;
+     const orderItems = require('./modules/orderItem') ;
+     const OrderItem = require('./modules/orderItem')
+     const { FORCE } = require('sequelize/lib/index-hints')
+     // lets work with sequalizer and let it to run  the server 
+     // Association ( search in sequalizer Doc)
+     // I will keep the user s the connector between all moculews and tables: as the user is the one with many products one card and even order so 
+     Product.belongsTo(User,{constraints : true, onDelete: 'CASCADE'})// onDelete CASCADE means if I deleted the user delete its products too
+     User.hasMany(Product)
+     User.hasOne(Cart)
+     Cart.belongsTo(User)
+     User.hasOne(cartItems)
+     Cart.belongsToMany(Product , {through : cartItems})
+     Product.belongsToMany(Cart , {through : cartItems})
+     Order.belongsTo(User)
+     User.hasMany(Order)
+     Order.belongsToMany(Product,{through : OrderItem})
+
+
+     sequalizer.sync({FORCE : true}).then(result=>{
+          // force is use in parameter  ({force : true}) here to make a database everytime we wont to overwrote (dependesy : delete at the end)
+          return User.findByPk(1)
+          // console.log(result);
+     }).then(user=>{
+          if(!user){
+               return User.create({name : 'Tamana',email : 'tamana.farzami33@gmail.com'})
+          }
+          return user;
+     }).then((user)=>{
+          
+          return user.createCart();
+          // console.log(user);
+     
+     }).then(user=>{
+     app.listen(5430)
+     }).catch(err=>{
+          console.log(err);
+     })
+     */
+
+
+Controller - Admin.js : 
+fun postAddProduct :
+ // updating product by using sequalizer (User)
+     // console.log(req.user);
+      // req.user.createProduct({
+     //      title: title,
+     //     price: price,
+     //     imageURL: imageUrl,
+     //     description: description }
+     // ).then((result)=>{
+     //      res.redirect('/admin/products')
+     // }).catch(err=>console.log("THen HEREEE",err))
+     // updating product by using sequalizer 
+     //   Product.create({
+     //     title: title,
+     //     price: price,
+     //     imageURL: imageUrl,
+     //     description: description,
+     //     userId:req.user.id
+     //   })
+     //     .then(result => {
+     //       // console.log(result)
+     //     res.redirect('/admin/products')
+     //     })
+     //     .catch(err => {
+     //       console.log(err);
+     //     });
+
+     
+     // updating data table by using sql :
+     // const product = new Product(null,title,imageUrl,price,description);
+     // product.save().then(()=>{
+     //      res.redirect('/') // Redirect the user to the  / route after processing the form submission
+     // }).catch(err=>{
+     //      console.log(err);
+     // })
+     
+fun showAdminProduct :
+  // using SQL (and from file)
+     // Product.fetchAll().then(([row,fileContent])=>{
+
+     //      // console.log(products);
+     //      res.render('admin/products',{
+     //           prods : row ,
+     //           pageTitle : 'Admin Add products',
+     //           path: '/admin/products',
+               
+     //           })
+  
+     // }).catch(err=> console.log(err))
+
+fun getEditProduct:
+   // console.log(ProductId);
+     // req.user.createProduct({where : {id :ProductId}}) 
+     // with sql : 
+     //req.user.getProducts({where : {id : ProductId}})
+     //     Product.findAll({where: {id : ProductId}}).then(product => {
+     //  if (!product) {
+     //    return res.redirect('/');
+     //  }
+     //  try {
+               
+     //       res.render('admin/edit-product', {
+     //         pageTitle: 'Edit Product',
+     //         path: '/admin/edit-products',
+     //         editing: editMode,
+     //         product: product
+     //       });
+     //  } catch (err) {
+     //      console.log("Look Here ", err);
+     //  }
+     //})
+     //.catch(err => console.log(err));
+
+fun postEditProduct :
+ //with sequalizer 
+
+     // req.user.getProducts({where: {id:prodID}}) for sql 
+     //      product.save(prodID).then((product)=>{
+     //           product.title = updateeTitle,
+     //           product.price = updatedPrice,
+     //           product.description = updatedDescription,
+     //           product.imageURL = updatedImageUrl 
+     //           return product.save()
+
+     // }).then(
+
+     //           res.redirect('/admin/products')
+
+     //      ).catch(err=> console.log(err))
+     //with SQL
+     // const updatedProduct= new Product(prodID,updateeTitle,updatedImageUrl,updatedPrice,updatedDescription)
+     // updatedProduct.save() 
+
+fun Post Deleted Product : 
+     //using sequalizer
+     // Product.findByPk(prodId).then(product=>{
+     //      product.destroy()
+     // }).then(()=>{
+     //            console.log("Done")
+     //       res.redirect('/admin/products')
+
+     // }).catch(err => console.log(err))
+ // using sql 
+     // Product.deleteById(prodId)
+
+Controller - Shop.js
+fun getProductsShop : 
+  // with sql 
+     //   Product.fetchAll().then(([rows])=>{
+  
+     //  // res.sendFile(path.join
+     //            // console.log(products);
+     //            res.render('shop/product-list',{
+     //                prods : rows ,
+     //                  pageTitle : 'Products',
+     //                 path: '/products',
+               
+     //                })
+     //   }).catch(err =>{
+     //     console.log(err);
+     //   })
+fun getShopPage : 
+
+  // by using sql 
+     //       Product.fetchAll().then(([row])=>{
+     // //row is whatever your database returning, like product
+     // res.render('shop/index',{
+     //     prods : row ,
+     //       pageTitle : 'All products',
+     //      path: '/',
+     //      prodsExist : row.length > 0,
+     //       activeShop: true,
+     //      productCss : true
+     //  // res.sendFile(path.join(rootDir,'Views','shop.html'))// it will send this file as a respond so that it will bw shown in page. a : __dirname mean chick    the folder that I write this code on its file  b : '../' as the dir point on main folder and we need to go up , c: Views the secpnd port in URL , d: the last      port of the url and the file
+     // })
+     //       }).catch(err=> console.log(err))// to render the default templates of shop.pug based the default tecmplate, and sinding the dynamic data (I had store  and make it map through the js object ) to the pug file 
+fun getProductById : 
+ // for working with sequalizer :
+    /**
+     
+            Product.findAll({where: {id: productId}}).then(products =>{
+      res.render('shop/product_detail',{
+              product : products[0],
+                pageTitle : products.title,
+                path: '/products'
+            })
+    }).catch(err=>console.log(err))
+          while working with sql : 
+          Product.findById(productId).then((product)=>{
+            console.log(product);
+            res.render('shop/product_detail',{
+              product : product,
+                 pageTitle : product.title,
+                 path: '/products'
+            })
+
+          }).catch(err => console.log(err))
+      
+          console.log(productId);
+     */
+fun getCartShop : 
+     // sith Sequalizer
+     /**
+     req.user.getCart().then(cart =>{
+     // console.log(cart);
+     return cart.getProducts().then(product =>{
+      res.render('shop/cart', {
+     path: '/cart',
+     pageTitle : 'Cart', 
+     prods : product ,
+     })
+      }).catch(err=>console.log(err))
+      }).catch(err=>{
+   console.log(err);
+     })
+ 
+      */
+fun postCardShop:
+ // with sequlizer
+  /**
+   
+  let fetchCart ; 
+  let newQuantity = 1
+  req.user.getCart().then(cart=>{
+    fetchCart = cart
+    // console.log(id,productId);
+     return cart.getProducts({where: {id : productId}})
+  }).then(products=>{
+    let product;
+    if(products.length > 0){
+
+      product = products[0]
+    }
+
+    if(product){
+     // increasing quantity here
+      const oldQuantity= product.cartItem.quantity ;
+      newQuantity = oldQuantity + 1
+      return product;
+
+    }
+      return Product.findByPk(productId);
+  }).then(product=>{
+     return fetchCart.addProduct(product, {through : {quantity : newQuantity}})
+  }).then(()=>{
+    res.redirect('/cart')
+  }).catch(err=>{
+    console.log(err);
+  })
+   */
+   
+  //with SQL 
+  // try {
+    
+  //     Product.findById(productId).then((product)=>{
+  //        Cart.addProduct(productId, product.price)
+  //     }).catch(err =>{console.log(err)})
+  // } catch (error) {
+  //     console.log(error);
+  // }
+  //   res.redirect('/cart');  
+fun postDelCardView : 
+
+    // By sequalier 
+    /**
+     req.user.getCart().then(cart=>{
+       return cart.getProducts({where : {id : productId}})
+     }).then(products=>{
+       const product = products[0]
+       // console.log(product);
+       return product.cartItem.destroy()
+     }).then(()=>{
+       res.redirect('/cart')
+     }).catch(err => console.log(err))
+     
+     */
+    
+     // By SQL
+     /**
+      // Product.findById(productId,product=>{
+      //     Cart.deleteProd(productId,product.price)
+      //     res.redirect('/cart')
+      // })
+      // console.log(productId);
+      
+      */
+fun PostOrederShop : 
+ // with sequalizer
+  /**
+  
+ req.user.getCart().then(cart=>{
+   fetchedCart = cart 
+   return cart.getProducts()
+ }
+ ).then(product=>{
+  return req.user.createOrder().then((order)=>{
+ order.addProduct(
+   product.map(product=>{
+     product.order_item = {quantity : product.cartItem.quantity}
+     return product
+   })
+ )
+  }).catch(err=>console.log(err))
+   // console.log(prodeuct);
+ }).then(result=>{
+   return fetchedCart.setProducts(null)
+ }).then(()=>{
+   res.redirect('/order')
+ 
+ }).catch(err=>console.log(err))
+   */
+fun getOrderShop : 
+  // with sequalizer
+  /**
+   
+  req.user.getOrders({include : ['products']}).then(order=>{
+     // console.log(order);
+    res.render('shop/order',{
+      pageTitle : 'Ordered Page',
+              path: '/order',
+              order : order
+    })
+  }).catch(err =>console.log(err))
+  */
+  
+Modules : product.js (product class)
+
+     function sqlDatba(){
+     // unfunction this port // it is just for keeping code clean 
+
+     If you prefer working with data inside file, not bringing it from main database : 
+     const { json } = require('body-parser')
+     const fs = require('fs')
+     const path = require('path')
+     const p = path.join(
+               path.dirname(process.mainModule.filename),
+               'data',
+               'products.json'
+             )
+     const fetchDataFromFile = cb=>{
+          fs.readFile(p,(err,fileContent)=>{
+     
+               if (err) {
+                   return cb([]);
+               }
+                return cb(JSON.parse(fileContent));
+         
+          })
+     }
+          module.exports = class Product{
+          constructor(id,title,imageUrl,price,description){
+               this.id = id
+               this.title = title,
+               this.imageUrl =  imageUrl,
+               this.price = price,
+               this.description = description
+          }
+     
+          save(){
+            
+              fetchDataFromFile(products=>{
+                if(this.id){
+                    // to add the edititing feature, first find the product by its id 
+                    const excistedProductIndex = products.findIndex(prod => prod.id === this.id) 
+                    const updatedProduct = [...products]
+                    updatedProduct[excistedProductIndex] = this;
+                    fs.writeFile(p, JSON.stringify(updatedProduct),err=>{
+                         console.log(err);
+                    })
+               }else {
+                    // console.log(products);
+                    this.id = Math.random().toString()
+                    products.push(this)
+                      fs.writeFile(p, JSON.stringify(products),err=>{
+                         console.log(err);
+                    })
+               }
+              })
+              
+          }
+     
+         static deleteById(id){
+               fetchDataFromFile(prods=>{
+                    const cleanedId = id.toString().trim();
+                   
+                    const product = prods.find(prod => prod.id === cleanedId)
+                    
+                    // console.log( "See hereee " , product);
+               const prodForDel = prods.filter(prod => prod.id !== cleanedId)
+               // console.log(prods.id, "and",id);
+               // console.log(prodForDel);
+               fs.writeFile(p, JSON.stringify(prodForDel),err =>{
+                    if(!err){
+                         Cart.deleteProd(id, product.price)
+                    }
+                    console.log("Error",err);
+               })
+     })
+     }
+          static fetchAll(cb) {
+               // fetchDataFromFile(cb)
+      
+               }
+               static findById(id,cb){
+                    fetchDataFromFile(products => {
+                         const product = products.find(p => p.id === id)
+                         cb(product)
+                    })
+               }
+     }
+      
+     }
+     **/
+     /*
+
+
+     If you are using sql database : 
+     module.exports = class Product{
+     constructor(id,title,imageUrl,price,description){
+          this.id = id
+          this.title = title,
+          this.imageUrl =  imageUrl,
+          this.price = price,
+          this.description = description
+     }
+
+     save(){
+          return  db.execute('INSERT INTO products (title,description,price,imageURL) VALUES (?,?,?,?)',[
+               this.title,this.description, this.price, this.imageUrl]
+          )
+
+    
+     }
+
+    static deleteById(id){
+
+     }
+     static fetchAll() {
+          // bringing database 
+          return db.execute('SELECT * FROM products')  
+     }
+     static findById(id,cb){
+     
+          return db.execute('SELECT * FROM products WHERE products.id = ?',[id])     
+          
+     }
+     }
+     **/
+
+     // for sequalizer 
+     /**  
+ *
+      const Sequalizer =require('sequelize') ;
+     const sequalizer = require('../util/database');
+     const { promiseImpl } = require('ejs');
+
+     const Product = sequalizer.define('product',{// the first element is the table name you want that the sequalizer create for you, the 2nd is the object for columns
+          id:{
+               type:Sequalizer.INTEGER,
+               autoIncrement : true,
+               allowNull : false,
+               primaryKey : true,
+          },
+          title : Sequalizer.STRING,
+          description :{
+               type : Sequalizer.STRING,
+               allowNull : false,
+          },
+          price: {
+               type: Sequalizer.DOUBLE,
+               allowNull :false
+          },
+          imageURL : {
+               type : Sequalizer.STRING,
+               allowNull: false
+          }
+     });
+ */
+
+Modules : user.js : 
+     //with Sequalizeer
+     /**
+      // const Sequalizer = require('sequelize')
+     // const sequalizer = require('../util/database')
+
+     // const User = sequalizer.define('userProduct',{
+     // id : {
+     //  type:Sequalizer.INTEGER,
+     //           autoIncrement : true,
+     //           allowNull : false,
+     //           primaryKey : true,
+     // },
+     // name: Sequalizer.STRING,
+     // email  :{
+     //           type : Sequalizer.STRING,
+     //           allowNull : false,
+     //      }
+     // })
+     **/
+
+Modules : order.js (sequalizer)
+/**
+     // const Sequalizer = require('sequelize');
+
+     // const sequalize = require('../util/database')
+
+     // const Order = sequalize.define('order',{
+     //      id : {
+     //              type: Sequalizer.INTEGER,
+     //                allowNull : false,
+     //                autoIncrement : true,
+     //                primaryKey : true
+     //      }
+     // })
+     // module.exports = Order;
+*/
+
+ModulesL user.js (With mongoose) 
+
+/**
+     //with mongoDB
+     /**
+     
+     const mongoDB = require("mongodb");
+     const { get } = require("../routes/shop");
+     const getDb = require('../util/database').getDb;
+     const objectId = mongoDB.ObjectId;
+     class User {
+          constructor(username, email,cart,id){
+     this.name= username,
+     this.email=email,
+     this.cart = cart,
+     this._id = id
+          }
+          save(){
+               const db = getDb()
+               return db.collection('users').insertOne(this)
+          }
+
+          addToCart(product){
+               const cartProductIndex = this.cart.items.findIndex(cp =>{
+                    return cp.productID.toString() === product._id.toString()
+               })
+               
+               let newQuantity = 1; 
+               const updatedCartItem = [...this.cart.items]
+
+               if(cartProductIndex >= 0 ){
+               newQuantity = this.cart.items[cartProductIndex].quantity + 1 ;
+               updatedCartItem[cartProductIndex].quantity = newQuantity
+
+               }else {
+               updatedCartItem.push({productID : new objectId(product._id),quantity : newQuantity})
+               }
+                         
+                    const updatedCart = {items : updatedCartItem}   
+                    const db = getDb()
+               return db.collection('users').updateOne({_id : new objectId(this._id)},{$set : {
+                    cart:updatedCart
+               }})
+          }
+          getCart(){
+          const db = getDb()
+          const productIds = this.cart.items.map(item=>{
+               return item.productID
+          });
+          return db.collection('products')
+          .find({_id:{$in:productIds}})
+          .toArray()
+          .then(products=>{
+               return products.map(prod=>{
+                    return {...prod,quantity : this.cart.items.find(item=>{
+                         return item.productID.toString() === prod._id.toString()
+                    }).quantity}
+               })
+          })
+          .catch(err=>console.log(err))
+          }
+
+          static findById(id){
+                    const db = getDb()
+                    
+                    return db.collection('users').findOne({_id:new objectId(id)} ).then(user=>{
+                         console.log(user)
+                         return user 
+                    }).catch(err=>console.log(err))
+          }
+          addOrder(){
+               const db = getDb();
+          return this.getCart().then(products=>{
+
+                    const updatedOrder = {
+                    items : products,
+                    user:{
+                         _id: new objectId(this._id),
+                         name : this.name
+                    }
+                    }
+                    
+               return db.collection('orders').insertOne(updatedOrder)
+               }).then(result=>{
+                    this.cart = {items : []}// it clean the card not data base 
+                    return db.collection('users').updateOne({_id : new objectId(this._id) },{$set : {cart : {items : []}}})//it clear entire database 
+               }).catch()
+          }
+          getOrder(){
+               const db = getDb();
+               // const order =  db.collection('orders').find({'user._id' : new objectId(this._id)});
+               // console.log(order.toArray());
+               return db.collection('orders').find({'user._id' : new objectId(this._id)}).toArray()
+          }
+          deleteCartItem(prod_id){
+               const updatedItem = this.cart.items.filter(id =>{
+                    return id.productID.toString() !== prod_id.toString()
+               })
+               console.log(updatedItem);
+               const db = getDb();
+               return db.collection('users').updateOne({_id : new objectId(this._id)},{$set : {cart : {items : updatedItem}}})
+
+          }
+     }
+
+     module.exports = User;
+     */
+*/
+
+
+Module: Product.js 
+/**
+     // with mangoDb
+     /**
+     
+     // const Cart = require('./cart')
+     const db =require('../util/database')
+     const mongoDb = require('mongodb')
+
+
+     const getDb = require('../util/database').getDb;
+     class Product {
+          constructor(title,imageUrl,price,description,id,userId){
+               this.title = title,
+               this.imageUrl =  imageUrl,
+               this.price = price,
+               this.description = description,
+               this._id = id ? new mongoDb.ObjectId(id) : null,
+               this.userId = userId
+          }
+          save(){
+               const db =getDb() ;
+               let dbObs;
+               if(this._id){
+                    dbObs = db.collection('products').updateOne({_id : this._id},{$set:this})
+               }else {
+                    dbObs = db.collection('products').insertOne(this)
+                    
+               }
+               return dbObs.then(result =>{
+                    // console.log(result);
+               }).catch(err => console.log(err))
+          }
+
+          static fetchALL(){
+               const db =getDb()
+               return db.collection('products').find().toArray().then(result=>{
+                    // console.log(result);
+                    return result
+               }).catch(err=>console.log(err))
+          }
+          static findById(prodID){
+               const db = getDb()
+               const productId = new mongoDb.ObjectId(prodID)
+               return db.collection('products').find({_id : productId}).next().then(product=>{// in here the mangodb have stored the id in an other formate, to get the id or others you need to use mangodb's functionaions{_id : prodID} => ..
+                    // console.log(product);
+                    return product
+               }).catch(err=>console.log(err))
+          }
+          static deleteProd(prodId){
+                         const prodForDel =new mongoDb.ObjectId(prodId) ;
+               //              if (!prodForDel.isValid(prodId)) {
+               //       console.log(' Invalid ObjectId:', prodId);
+               //       return Promise.resolve()
+               //     }
+                    const db = getDb()
+                    try {
+                    return db
+                    .collection('products')
+                    .deleteOne({_id: prodForDel })
+                    .then(result=>{
+                         console.log("Deleted");
+                    }).catch(err=>console.log(err))
+                    
+               } catch (error) {
+                    console.log("Hereeee",error);
+               }
+          }
+     }
+     module.exports = Product
+     **/     
+*/
+
+
+Module : shop.js 
+/**
+     // by using MongoDB
+     /**
+     
+     req.user.getCart().then(cart =>{
+     console.log(cart);
+
+     res.render('shop/cart', {
+          path: '/cart',
+          pageTitle : 'Cart', 
+          prods : cart ,
+          })
+
+     }).catch(err=>{
+     console.log(err);
+     })
+     */
+*/
+ Module : shop.js (getCard function ) 
+{
+
+     
+
+
+
+  //   Cart.getCart().then((products)=>{
+
+  //     const cartProducts = []
+  //     for (prod of products){
+  //       const productExist = products.find(p => p.id === prod.id)
+  //         if(productExist) {
+  //          try {
+  //            cartProducts.push({productData : prod , qty : productExist.qty})
+  //          } catch (error) {
+  //            console.log("Hereeeee",error);
+  //         }
+  //         }
+  //     }
+  // res.render('shop/cart', {
+  //   path: '/cart',
+  //   pageTitle : 'Cart', 
+  //   prods : cartProducts ,
+  //   })
+  // }).catch(err => console.log(err)) 
+}

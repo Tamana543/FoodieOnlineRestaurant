@@ -1,0 +1,90 @@
+.flex {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+form {
+     display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+     padding: 10% 5%;
+  gap: 10px;
+  
+}
+label {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-right: 3%;
+  width: 50%;
+}
+#Name,
+#lastName,
+#password,
+#confirmPassword {
+  outline: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #df29f0;
+
+}
+.form-cotrol label{
+  font-size: 70%;
+}
+.submit {
+  margin-top: 5%;
+}
+
+.log_in {
+  background: none;
+  /* border: 1px solid #df29f0; */
+  box-shadow: inset 0px 0px 0px 1px #df29f0;
+  color: #000;
+}
+
+.window {
+     display: block;
+     margin: 5% auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 39%;
+  height: 22rem;
+  position: relative;
+}
+#logout_btn {
+  padding:0% 1%;
+}
+ #logout_btn:hover {
+border-bottom: 1px solid white ;
+ }
+.submit {
+  padding: 10px 20px;
+  background-color: #d468d4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #df29f04f;
+  color: #000;
+}
+.reset_container {
+  width: 100%;
+height: 20%;
+}
+.reset_password{ 
+margin-bottom: 15%;
+text-decoration: none;
+padding-bottom :2% ;
+border-bottom: 1px solid #d468d4;
+color: #d468d4;
+}
+.reset_password:hover {
+  color: #9302a0;
+ font-weight: bold;
+}
+.signupForm input.invalid,
+.loginForm input.invalid {
+border-bottom: 2px solid rgb(255, 3, 3) !important;
+
+}

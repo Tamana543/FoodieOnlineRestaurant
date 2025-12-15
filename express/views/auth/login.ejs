@@ -1,0 +1,47 @@
+<%- include('../includes/start.ejs') %>
+   <link rel="stylesheet" href="/style/auth.css">
+   <link rel="stylesheet" href="/style/main.css">
+     
+</head>
+<%- include('../includes/navigation.ejs') %>
+
+<div class="window log_in-window">
+  <form method="post" class="flex loginForm" action="/login">
+      <h3>LogIn</h3>
+        <div class="name flex">
+          <label for="email">Email</label>
+          <% console.log(validationError) %>
+       
+          <input
+     class="<%= validationError.find(e => e.path == 'email' )? 'invalid' : '' %>"
+           type="email" 
+           name="email" 
+           id="Name" 
+           value="<%= oldData.email %>"
+           />
+        </div>
+        <div class="last_name flex">
+          <label for="password" class="last_name-label">Password</label>
+          <input 
+          class="<%= validationError.find(e => e.path == 'password' )? 'invalid' : '' %>"
+          type="password"
+           name="password"
+            id="lastName" 
+            value="<%= oldData.password %>"
+            />
+        </div>
+<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="submit">Submit</button>
+      </form>
+      <div class="flex reset_container" >
+        <a href="/reset" class="reset_password">Reset Password</a>
+
+      </div>
+      </div>
+      <%if(errorMessage) { %>
+
+
+<div class="user_err"><%= errorMessage %></div>
+
+<% }%>
+<%- include('../includes/end.ejs') %>

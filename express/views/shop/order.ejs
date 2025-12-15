@@ -1,0 +1,29 @@
+<%- include('../includes/start.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+<link rel="stylesheet" href="/style/order.css">
+<main>
+     <% if(order <=0 ) {%>
+     <h1>Nothing to be ordered</h1>
+     <% }else{%>
+          <ul class="orders">
+               <% order.forEach(item =>{ %>
+               <li>
+                    <!-- <% console.log('This is logged to the server console.', item.id); %> -->
+
+                    <h1># <%= item._id %></h2>
+                         <a href="/order/<%= item._id %>">Invoice</a>
+                    <ul class="orders__products">
+                         <% item.products.forEach(p => { %>
+
+                         <li  class="orders__products-item">
+                              <%= p.product.title %> ( <%= p.quntity %>) 
+                              
+                         </li>
+                         <% }); %>
+                    </ul>
+               </li>
+               <% }) ;%>
+          </ul>
+     <%} %>     
+</main>
+<%- include('../includes/end.ejs') %>

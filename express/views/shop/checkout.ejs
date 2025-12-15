@@ -1,0 +1,47 @@
+<%- include('../includes/start.ejs') %>
+<link rel="stylesheet" href="/style/card.css">
+<%- include('../includes/navigation.ejs') %>
+<main>
+ 
+            <%  if (prods.length > 0) { %>
+                <ul class="cart__item-list">
+                    <% prods.forEach(p => { %>
+                           <% if (!p.productId) { return; } %>  <!--To filter the deleted products -->
+                        <li class="cart__item">
+                            <h1><%= p.productId.title %></h1>
+                            <h2>Quantity: <%= p.quantity %></h2>
+                           
+                        </li>
+                    <% }) %>
+                </ul>
+                <div class="centered">
+                    <h2>Total Cast: <%= totalCast %> $ </h2>
+                </div>
+                <div class="centered">
+               
+                <button class="btn orderLink" id="btn">Order</button>
+                </div>
+            <% } else { %>
+                <h1>No Products in Cart!</h1>
+            <% } %>
+
+            <div>
+                <script src="https://js.stripe.com/v3/"></script>
+                            <script>
+//                     const Stripe = require('stripe');
+const stripe = Stripe('pk_test_51SQrvaK9KSZoYEE7JzbGyzeYzC0gNANSH8aDRMkn5Fk8js8DfWzfauV2kjF6synAYu8Mi1QwxL7iZI1niaOAPLT800T5Ed87tr');
+const btn = document.getElementById("btn")
+btn.addEventListener("click", async () => {
+  const response = await fetch('/create-checkout-session', { method: 'POST' });
+  const session = await response.json();
+const result = await stripe.redirectToCheckout({ sessionId: session.id });
+  
+
+if(result.error){
+    console.error(result.error.message);
+}
+});
+                </script>
+            </div>
+</main>
+<%- include('../includes/end.ejs') %>

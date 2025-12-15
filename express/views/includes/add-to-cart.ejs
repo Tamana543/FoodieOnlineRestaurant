@@ -1,0 +1,7 @@
+ <form action="/cart" method="post">
+     <!-- For hundling add to card button we need to send the data to the car, for this (if the method is POST ) You can use : -->
+     <input type="hidden" name="productId" value="<%=product._id%>"/> 
+     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+     <button class="btn" type="submit">Add to Cart</button>
+              
+            </form>

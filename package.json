@@ -1,0 +1,41 @@
+{
+  "name": "nodejs-practice",
+  "version": "1.0.0",
+  "main": "firstApp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./express/ExpressApp.js",
+    "start_sec": "nodemon ./3_0/firstApp.js",
+    "start-server": "nodemon server.js"
+  },
+  "author": "Tamana Farzami ",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^5.0.0",
+    "csurf": "^1.11.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.2",
+    "express-validator": "^7.2.1",
+    "mailtrap": "^4.2.0",
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.17.0",
+    "multer": "^2.0.2",
+    "mysql2": "^3.14.2",
+    "nodemailer": "^6.10.1",
+    "pdfkit": "^0.17.2",
+    "pug": "^3.0.3",
+    "punycode": "^2.3.1",
+    "sequelize": "^6.37.7",
+    "sib-api-v3-sdk": "^8.5.0",
+    "stripe": "^19.3.0"
+  }
+}

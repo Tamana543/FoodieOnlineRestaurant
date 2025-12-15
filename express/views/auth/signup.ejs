@@ -1,0 +1,50 @@
+<%- include('../includes/start.ejs') %>
+   <link rel="stylesheet" href="/style/auth.css">
+   <link rel="stylesheet" href="/style/main.css">
+     
+</head>
+<%- include('../includes/navigation.ejs') %>
+
+<div class="window log_in-window">
+  <form method="post" class="flex signupForm" action="/signup" style="gap: 0% !important;" novalidate>
+    <h3>Signup</h3>
+    <div class="name flex">
+      <label for="email" >Email</label>
+   
+      <input 
+      type="email"
+          class="<%= validationError.find(e => e.path == 'email' ) ? 'invalid' : '' %>"
+           name="email" id="password"
+            value="<%= oldData.email %>"
+            
+            />
+        </div>
+        <div class="last_name flex">
+          <label for="last-name" class="last_name-label">Password</label>
+          <input 
+          class="<%= validationError.find(e => e.path == 'password' ) ? 'invalid' : '' %>"
+          type="password" 
+          name="password" 
+          id="password" 
+          value="<%= oldData.password %>" />
+        </div>
+ <div class="form-control flex">
+                <label for="confirmPassword" width=60 >Confirm Password</label>
+                <input
+                class="<%= validationError.find(e => e.path == 'confirmPassword' ) ? 'invalid' : '' %>"
+                 type="password" 
+                 name="confirmPassword" 
+                 id="confirmPassword"
+                value="<%= oldData.confirmPassword %>">
+            </div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit" class="submit">Signup</button>
+      </form>
+      </div>
+      <%if(errorMessage) { %>
+
+
+ <div class="user_err"><%= errorMessage %></div>
+ 
+ <% }%>
+<%- include('../includes/end.ejs') %>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>404 Not Found</title>
+      <script
+      src="https://kit.fontawesome.com/66aa7c98b3.js"
+      crossorigin="anonymous"
+    ></script>
+
+  <link rel="stylesheet" href="/style/main.css">
+  {{#if 404Css}}
+  <link rel="stylesheet" href="/style/404.css">
+  {{/if}}
+  {{#if productCss}}
+  <link rel="stylesheet" href="/style/product.css">
+  {{/if}}
+  {{#if formCss}}
+  <link rel="stylesheet" href="/style/form.css">
+  {{/if}}
+</head>
+
+<body>
+      <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item"><a class="{{#if activeShop}}active{{/if}}" href="/">Shop</a></li>
+                <li class="main-header__item"><a class="{{#if addProductPage}}active{{/if}}" href="/admin/add-product">Add Product</a></li>
+            </ul>
+        </nav>
+    </header>
+    {{{body}}}
+    </body>
+    </html>
