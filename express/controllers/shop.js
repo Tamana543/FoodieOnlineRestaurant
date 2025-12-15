@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 // const Stripe = require('stripe')('')
-const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+const Stripe = require('stripe')('sk_test_51SQrvaK9KSZoYEE7Rkde09ZNsuH71PipjWgaVmPV1Xiy5f7yRQxRl0jCJVOQZDHyRthtQUkomK9xJbvd7jjmEnKn00EcsqeejR')
 const Product = require('../modules/product')
 const Order = require('../modules/order')
 const PDFDocument = require('pdfkit')
@@ -125,7 +125,7 @@ carts.forEach(p=>{
  })
  }).then(session=>{
   res.render('shop/checkout', {
-    stripePublicKey: process.env.STRIPE_PUBLIC_KEY,
+    stripePublicKey: 'sk_test_51SQrvaK9KSZoYEE7Rkde09ZNsuH71PipjWgaVmPV1Xiy5f7yRQxRl0jCJVOQZDHyRthtQUkomK9xJbvd7jjmEnKn00EcsqeejR',
      path: '/checkout',
      pageTitle : 'Checkout', 
      totalCast : total ,
