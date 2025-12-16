@@ -1,9 +1,9 @@
 # FOODIE
-### A full-stack e-commerce web application built with Node.js, Express, MongoDB, EJS, and Stripe. This project supports product management, cart functionality, secure checkout with Stripe, order creation, and invoice generation.
+####  A full-stack e-commerce web application built with Node.js, Express, MongoDB, EJS, and Stripe. This project supports product management, cart functionality, secure checkout with Stripe, order creation, and invoice generation.
 
-<br>
+<hr>
 
-### Features 
+## Features 
 
 ##### Secure data 
 ##### Mongo DB database 
@@ -17,7 +17,9 @@
 ##### Order creation after successful payment
 ##### PDF invoice generation for orders
 
-### Tech Stack 
+</hr>
+
+## Tech Stack 
 
 #### Backend
 
@@ -36,8 +38,9 @@
 ##### Sessions
 ##### Environment variables (dotenv)
 
+</hr>
 
-### Project Structure 
+## Project Structure 
 <code>
 express/
 │── controllers/
@@ -66,7 +69,9 @@ express/
 │── package.json
 </code>
 
-### Future Improvements
+<hr/>
+
+## Future Improvements
 
 ##### User roles (admin / customer)
 ##### Product categories
@@ -74,4 +79,4 @@ express/
 ##### Better error UI
 ##### Deployment (Render / Railway / Vercel)
 
-### Built with persistence, debugging pain, and a lot of learning by Tamana 💖👩‍💻
+## Built with persistence, debugging pain, and a lot of learning by Tamana 💖👩‍💻
