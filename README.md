@@ -1,5 +1,5 @@
 # FOODIE
-### A complete mini online food shop 
+### A full-stack e-commerce web application built with Node.js, Express, MongoDB, EJS, and Stripe. This project supports product management, cart functionality, secure checkout with Stripe, order creation, and invoice generation.
 
 <br>
 
@@ -7,13 +7,71 @@
 
 ##### Secure data 
 ##### Mongo DB database 
-##### Authentication ( Login, Sign up , Reset Password)
-#####  MVC structure 
-##### Stripe 
-##### CSRF Token 
-##### .env
-<p> 
-<img src="screencapture-localhost-5430-login-2025-12-16-11_03_04.png">
-<img src="screencapture-localhost-5430-2025-12-16-11_02_49.png">
+##### User authentication & session handling
+##### Product listing with pagination
+##### MVC architecture 
+##### Image upload for products 
+##### CSRF protection
+##### Shopping cart (add / remove products)
+##### Secure checkout using Stripe
+##### Order creation after successful payment
+##### PDF invoice generation for orders
 
-</p>
+### Tech Stack 
+
+#### Backend
+
+##### Node.js
+##### Express.js
+##### MongoDB + Mongoose
+##### Stripe API
+##### PDFKit
+
+#### Frontend
+##### EJS (Embedded JavaScript templates)
+##### CSS
+##### Vanilla JavaScript
+##### Security & Utilities
+##### CSRF protection
+##### Sessions
+##### Environment variables (dotenv)
+
+
+### Project Structure 
+<code>
+express/
+│── controllers/
+│   └── shop.js
+│
+│── models/
+│   ├── product.js
+│   ├── user.js
+│   └── order.js
+│
+│── routes/
+│   └── shop.js
+│
+│── views/
+│   ├── shop/
+│   ├── admin/
+│   └── includes/
+│
+│── public/
+│   ├── css/
+│   └── js/
+│
+│── images/
+│── data/
+│── app.js
+│── package.json
+</code>
+
+### Future Improvements
+
+##### User roles (admin / customer)
+##### Product categories
+##### Email confirmations
+##### Better error UI
+##### Deployment (Render / Railway / Vercel)
+
+### Built with persistence, debugging pain, and a lot of learning by Tamana 💖👩‍💻
