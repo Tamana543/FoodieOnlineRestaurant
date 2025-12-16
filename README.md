@@ -5,38 +5,31 @@
 
 ## Features 
 
-##### Secure data 
-##### Mongo DB database 
-##### User authentication & session handling
-##### Product listing with pagination
-##### MVC architecture 
-##### Image upload for products 
-##### CSRF protection
-##### Shopping cart (add / remove products)
-##### Secure checkout using Stripe
-##### Order creation after successful payment
-##### PDF invoice generation for orders
+- Secure data 
+- Mongo DB database 
+- User authentication & session handling
+- Product listing with pagination
+- MVC architecture 
+- Image upload for products 
+- CSRF protection
+- Shopping cart (add / remove products)
+- Secure checkout using Stripe
+- Order creation after successful payment
+- PDF invoice generation for orders
 
 </hr>
 
 ## Tech Stack 
 
-#### Backend
 
-##### Node.js
-##### Express.js
-##### MongoDB + Mongoose
-##### Stripe API
-##### PDFKit
+- **Backend:** Node.js, Express.js  
+- **Frontend:** EJS, CSS  
+- **Database:** MongoDB + Mongoose  
+- **Payments:** Stripe Checkout  
+- **Authentication:** Sessions  
+- **PDF Generation:** pdfkit  
 
-#### Frontend
-##### EJS (Embedded JavaScript templates)
-##### CSS
-##### Vanilla JavaScript
-##### Security & Utilities
-##### CSRF protection
-##### Sessions
-##### Environment variables (dotenv)
+
 
 </hr>
 
@@ -73,10 +66,10 @@ express/
 
 ## Future Improvements
 
-##### User roles (admin / customer)
-##### Product categories
-##### Email confirmations
-##### Better error UI
-##### Deployment (Render / Railway / Vercel)
+- User roles (admin / customer)
+- Product categories
+- Email confirmations
+- Better error UI
+- Deployment (Render / Railway / Vercel)
 
 ## Built with persistence, debugging pain, and a lot of learning by Tamana 💖👩‍💻
