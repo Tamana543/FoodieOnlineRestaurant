@@ -73,3 +73,8 @@ express/
 - Deployment (Render / Railway / Vercel)
 
 ## Built with persistence, debugging pain, and a lot of learning by Tamana 💖👩‍💻
+
+![main page](screencapture-localhost-5430-2025-12-16-11_02_49.png)
+
+
+![Authontication](screencapture-localhost-5430-login-2025-12-16-11_03_04.png)
