@@ -95,11 +95,11 @@ exports.getCheckout = (req,res,next)=>{
   let carts ;
   let total;
    req.user.populate('cart.items.productId').then(user =>{
-//  console.log(cart);
+
 
 carts = user.cart.items.filter(p => p.productId)
 total= 0 
-console.log('Me',carts);
+
 carts.forEach(p=>{
    if (p.productId) {
           total += p.productId.price * p.quantity;
@@ -143,7 +143,7 @@ carts.forEach(p=>{
 }
 exports.getCheckoutSuccess = ()=>{
   req.user.populate('cart.items.productId').then(user =>{
-//  console.log(cart);
+
 const product = user.cart.items.map(i =>{
   return {quantity : i.quantity, product : {...i.productId._doc}}
 });
@@ -196,13 +196,12 @@ exports.createCheckoutSession = (req,res,next)=>{
   })
 }
 exports.getCartShop =(req,res,next)=>{
-// console.log(req.user.getCart());
+
 // by Mongoose
-// console.log("Meee",user.cart.items.productId)
  req.user.populate('cart.items.productId').then(user =>{
-//  console.log(cart);
+
 const carts = user.cart.items;
-console.log('Me',carts);
+
  res.render('shop/cart', {
      path: '/cart',
      pageTitle : 'Cart', 
@@ -219,14 +218,14 @@ console.log('Me',carts);
 }
     
 exports.postCartShop = (req,res,next)=>{
-  // console.log('req Budy ', req.body);
+  
   const productId = req.body.productId;
-  // console.log('Idddd',productId);
+ 
 
 try {
   
   Product.findById(productId).then((product)=>{
- console.log("Me",req);
+ 
   return req.user.addToCart(product)
   }).then(
     (result)=>{
@@ -246,7 +245,7 @@ errorEng(error,next);
 
 exports.postDelCardView = (req,res,next)=>{
     const productId = req.body.productId.trim();
-    // console.log("Here",req.user);
+    
     
 //By mongoDb
 req.user.deleteCartItem(productId)
@@ -262,7 +261,7 @@ req.user.deleteCartItem(productId)
 exports.postOrderShop = (req,res,next)=>{
   
 req.user.populate('cart.items.productId').then(user =>{
-//  console.log(cart);
+
 const product = user.cart.items.map(i =>{
   return {quantity : i.quantity, product : {...i.productId._doc}}
 });
@@ -382,5 +381,5 @@ pdfDoc.fontSize(15).text(`
 }).catch((err)=>{
   next(new Error(err))
 })
-// console.log(orderId);
+
 }

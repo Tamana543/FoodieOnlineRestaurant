@@ -12,7 +12,6 @@ const { Error } = require('mongoose');
 const errorEng = (err,next)=>{
      
      const error = new Error(err);
-     console.log(error);
      error.httpStatusCode = 500;
      return next(error);
 }
@@ -44,14 +43,13 @@ try {
 }
 
 exports.postAddProduct = (req,res,next)=>{
-     // console.log(req.file)
-     // console.log(req.body)
+ 
 
      const title =req.body.title ;
      const image =req.file;
      const price  =req.body.price ;
      const description  =req.body.description ;
-     console.log(req.file);
+
     
      if(!image){
           return res.render('admin/edit-products', {
@@ -72,7 +70,7 @@ exports.postAddProduct = (req,res,next)=>{
 const error =  validationResult(req)
               
          // using MangoDb
-//     console.log(error);
+
     if(!error.isEmpty()){
      return  res.render('admin/edit-products', {
                pageTitle: 'Add Product',
@@ -94,10 +92,10 @@ const error =  validationResult(req)
 
 const imageUrl = path.join('images', image.filename);
 
-// console.log("Here",req.user)
+
 const productData = new Product(
           {
-               // _id : new mongoose.Types.ObjectId("68daa227a774b255b824f95c"),
+              
                title : title,
                price:price, 
                description:description,
@@ -108,7 +106,7 @@ const productData = new Product(
                })
 
      productData.save().then(result => {// remember while using mangoose you do not need to add the save methood on your product module, mangoos contain it itself 
-          //  console.log(result)
+      
          res.redirect('/admin/products')})
          .catch(err=> {
           errorEng(err,next)
@@ -150,7 +148,7 @@ exports.getEditProduct = (req,res,next)=>{
     
      if(editMode){
           const ProductId = req.params.productID;
-     //    console.log(ProductId);
+
   
 // for mongodb && mongoose
      Product.findById(ProductId).then(product => {
@@ -178,8 +176,8 @@ exports.getEditProduct = (req,res,next)=>{
           console.log("Here");
                return res.redirect('/')
      }
-     // console.log("Received product ID:", req.params.productID);
-     // console.log("Edit mode:", req.query.edit);
+
+    
     
 
 }
@@ -190,10 +188,10 @@ exports.postEditedProduct = (req,res,next)=>{
      const updatedPrice = req.body.price;
      const updatedImage = req.file;
      const updatedDescription = req.body.description;
-     // console.log("Here", prodID);
+
     
      if(!updatedImage){
-          console.log("Iam hereeee");
+       
           return res.render('admin/edit-products', {
                pageTitle: 'Add Product',
                path: '/admin/edit-product',
@@ -211,8 +209,8 @@ exports.postEditedProduct = (req,res,next)=>{
 }else{
     
      Product.imageUrl= updatedImage.path;
-     // console.log('Here',imageUrl);
-     console.log("here",Product.imageUrl)
+     
+     
      // fileHelper.deleteFile(Product.imageUrl)
       }
  const error =  validationResult(req)
@@ -242,7 +240,7 @@ exports.postEditedProduct = (req,res,next)=>{
 
      Product.findById(prodID)
      .then(product=>{
-               console.log(product);
+           
                if(product.productId.toString() !== req.user._id.toString()){
                     return res.redirect('/')
                }
@@ -250,12 +248,12 @@ exports.postEditedProduct = (req,res,next)=>{
                if(updatedImage){
                     fileHelper.deleteFile(product.imageUrl);
                product.imageUrl = updatedImage.path.replace(/\\/g, '/').split('express/')[1];;
-               console.log(product.imageUrl);
+              
                }
                product.price = updatedPrice;
                product.description = updatedDescription
                return product.save().then(result=>{
-               console.log("Product Updated");
+             
                res.redirect('/admin/products')
      }).catch(err=>{
           errorEng(err,next)
@@ -266,17 +264,17 @@ exports.postEditedProduct = (req,res,next)=>{
 exports.deleteProduct = (req,res,next)=>{
    
      const prodId = req.params.productId.trim();
-     console.log(prodId)
+
 Product.findById(prodId)
 .then(product=>{
-          console.log(product);
+      
 if(!product){
      return next(new Error("Product not found "))
 }
 fileHelper.deleteFile(product.imageUrl);
           return  Product.deleteOne({_id: prodId , productId : req.user._id})
           .then(()=>{
-          console.log("Deleted");
+       
             res.status(200).json({message : "Product deleted"})
 
           }).catch(err=>{

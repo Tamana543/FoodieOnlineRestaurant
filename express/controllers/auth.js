@@ -10,7 +10,6 @@ const errorEng = (err,next)=>{
      
       const error = new Error(err);
       error.httpStatusCode = 500;
-      console.log(error);
       return next(error);
 }
 
@@ -87,7 +86,7 @@ if(errorMessage.length > 0){
 }else {
   errorMessage = null
 }
-  // console.log("Me",req.session.isloggedin);
+
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Signup',
@@ -133,7 +132,7 @@ user.findOne({email : email}).then((user)=>{
     req.session.isloggedin =true
     req.session.user = user
    return  req.session.save((err)=>{
-      // console.log(err);
+   
  
       res.redirect('/')
     })
@@ -170,7 +169,7 @@ exports.postSignup = (req, res, next) => {
   const password = req.body.password;
 const validated = validationResult(req)
 if(!validated.isEmpty()){
-  console.log(validated.array())
+  
   let error = validated.array()[0].msg
   return res.status(422).render('auth/signup', {
     path: '/signup',
@@ -232,7 +231,7 @@ if(errorMessage.length > 0){
 }else {
   errorMessage = null
 }
-  // console.log("Me",req.session.isloggedin);
+
   res.render('auth/resetPassword', {
     path: '/reset',
     pageTitle: 'Reset Password',
@@ -244,7 +243,7 @@ if(errorMessage.length > 0){
 exports.postReset = (req,res,next)=>{
 crypto.randomBytes(32,(error , buffer)=>{
 if(error){
-  console.log(error);
+ 
   res.redirect('/reset')
 }
 const token = buffer.toString('hex')
@@ -255,7 +254,7 @@ if(!userSearch){
   
   res.redirect('/reset')
 }
-// console.log(user.resetToken);
+
 userSearch.resetToken = token
 userSearch.resetExpiredToken = Date.now() + 360000 // to milisecond ;
 return userSearch.save() 
@@ -281,12 +280,10 @@ transport.sendMail({
 }
 )
 })
-// console.log(randumToken);
 }
 
 exports.getNewPassword = (req,res,next)=>{
   const token = req.params.token;
-  // console.log(token);
   user.findOne({resetToken : token , resetExpiredToken : {$gt : Date.now()}}).then(user =>{
   let errorMessage = req.flash('passwordRepeated')
 
@@ -307,7 +304,7 @@ res.render('auth/newPassword', {
 }).catch(err=>{
   errorEng(err,next)
 })
-  // console.log("Me",req.session.isloggedin);
+
 }
 
 exports.postNewPassword = (req,res,next)=>{
