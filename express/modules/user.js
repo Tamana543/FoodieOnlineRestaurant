@@ -39,9 +39,9 @@ UserSchema.methods.addToCart = function(product){
           }
                     
           const updatedCart = {items : updatedCartItem} 
-               // console.log("here",updatedCart);  
+       
           this.cart = updatedCart
-          // console.log(this.cart);
+         
           return  this.save()
      }
 
@@ -49,7 +49,7 @@ UserSchema.methods.deleteCartItem = function(prod_id){
       const updatedItem = this.cart.items.filter(item =>{
                return item.productId.toString() !== prod_id.toString()
           })
-          console.log(updatedItem);
+        
          this.cart.items = updatedItem;
          return this.save()
           

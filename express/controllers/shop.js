@@ -262,6 +262,7 @@ exports.postOrderShop = (req,res,next)=>{
   
 req.user.populate('cart.items.productId').then(user =>{
 
+  //For each original cart item (i), it creates and returns a new object with two properties:
 const product = user.cart.items.map(i =>{
   return {quantity : i.quantity, product : {...i.productId._doc}}
 });
