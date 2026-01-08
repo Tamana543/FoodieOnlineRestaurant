@@ -278,7 +278,7 @@ fileHelper.deleteFile(product.imageUrl);
             res.status(200).json({message : "Product deleted"})
 
           }).catch(err=>{
-                 res.status(500).json({message: "Product does not dleted"})
+                 res.status(500).json({message: "Product does not deleted"})
           })
  
      }).catch(err=> next(err))
