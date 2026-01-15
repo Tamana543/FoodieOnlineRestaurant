@@ -42,7 +42,7 @@ const transport = nodemailer.createTransport({
   secure: true,
   auth: {
     user: "tamanafarzami33@gmail.com",
-    pass: "jcuk kfph ulyx griq"
+    pass: "ocpr kwis ouha wvhx"
   }
 });
 
